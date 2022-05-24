@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import "./empyBoard";
 
 class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      squares: Array(9).fill(null),
+      squares: Array(9).fill(),
       xIsNext: true,
     };
   }
@@ -23,14 +24,15 @@ class Board extends React.Component {
     });
   }
 
-  renderSquare(i) {
-    return (
-      <Sqaure
-        value={this.state.squares[i]}
-        onClick={() => this.handleClick(i)}
-      />
-    );
-  }
+  // renderSquare(i) {
+  //   return (
+  //     <Sqaure
+  //       value={this.state.squares[i]}
+  //       onClick={() => this.handleClick(i)}
+  //       className="cell"
+  //     />
+  //   );
+  // }
 
   render() {
     const winner = calculateWinner(this.state.squares);
@@ -40,36 +42,12 @@ class Board extends React.Component {
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
-
     return (
-      <div>
-        <div className="status"> {status}</div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+      <div className="board">
+        <EmptyBoard />
       </div>
     );
   }
-}
-
-function Sqaure(props) {
-  return (
-    <button className="sqaure" onClick={props.onClick}>
-      {props.value}
-    </button>
-  );
 }
 
 class Game extends React.Component {
